@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Delivery Time Predictor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>🍔 Food Delivery Time Prediction</h2>
+
+    <form action="/predict" method="post" class="form-grid">
+
+        <!-- LEFT COLUMN (4 inputs) -->
+        <div class="left">
+            <input type="number" step="any" name="distance" placeholder="Distance (km)" required>
+
+            <select name="weather" required>
+                <option value="" disabled selected>Weather Condition</option>
+                <option value="Clear">Clear</option>
+                <option value="Rainy">Rainy</option>
+                <option value="Windy">Windy</option>
+                <option value="Foggy">Foggy</option>
+            </select>
+
+            <select name="traffic" required>
+                <option value="" disabled selected>Traffic Level</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+
+            <select name="time" required>
+                <option value="" disabled selected>Time of Day</option>
+                <option value="Morning">Morning</option>
+                <option value="Afternoon">Afternoon</option>
+                <option value="Evening">Evening</option>
+                <option value="Night">Night</option>
+            </select>
+        </div>
+
+        <!-- RIGHT COLUMN (3 inputs + button) -->
+        <div class="right">
+            <input type="number" name="prep_time" placeholder="Preparation Time (min)" required>
+
+            <input type="number" step="any" name="experience" placeholder="Courier Experience (years)" required>
+
+            <select name="vehicle" required>
+                <option value="" disabled selected>Vehicle Type</option>
+                <option value="Bike">Bike</option>
+                <option value="Scooter">Scooter</option>
+                <option value="Car">Car</option>
+            </select>
+
+            <button type="submit">Predict</button>
+        </div>
+
+    </form>
+
+    {% if prediction_text %}
+        <div class="result">
+            {{ prediction_text }}
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
